@@ -27,6 +27,7 @@ public class PointAndClickCharactercontroller : MonoBehaviour
             {
                 _agent.SetDestination(hit.point);
             }
+
         }
         _animator.SetFloat("_speed", _agent.velocity.magnitude/_agent.speed);
     }
