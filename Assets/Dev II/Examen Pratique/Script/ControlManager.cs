@@ -9,7 +9,6 @@ public class ControlManager : MonoBehaviour
     public static Action _OnGateOpen;
     public static Action _OnGateClose;
     public static Action<bool> _OnToggleLock;
-    public static Action<bool> _OnToggleLight;
     public static ControlManager _instance;
 
     [SerializeField] private TextMeshProUGUI _scoreTxt;
@@ -86,7 +85,6 @@ public class ControlManager : MonoBehaviour
     public void ToggleLight()
     {
         _isLightOn = !_isLightOn;
-        _OnToggleLight?.Invoke(_isLightOn);
         _lightTimer = 0;
         _currentLightIntensity = _light.intensity;
         if (_isLightOn)
