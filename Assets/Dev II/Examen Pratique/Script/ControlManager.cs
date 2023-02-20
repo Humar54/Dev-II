@@ -34,8 +34,9 @@ public class ControlManager : MonoBehaviour
     private bool _isUnlocked;
     private bool _isLightOn;
 
-    private void Awake()
+    private void Awake()//2pts
     {
+        //Utiliser un Singleton Pattern pour le Control Manager
         if (_instance != null)
         {
             Destroy(gameObject);
@@ -52,52 +53,46 @@ public class ControlManager : MonoBehaviour
         _moveSphere.onClick.AddListener(GiveImpulseToSphere); ;
     }
 
-    public void ToggleDoorButton()
+    public void ToggleDoorButton()//2pts
     {
         _isDoorOpen = !_isDoorOpen;
         if (_isDoorOpen)
         {
             _OnGateOpen?.Invoke();
-            _toggleGateBtn.image.sprite = _gateBtnImage[0];
         }
         else
         {
             _OnGateClose?.Invoke();
-            _toggleGateBtn.image.sprite = _gateBtnImage[1];
         }
+        // Inverser la valeur de _isDoorOpen
+        //si la porte doit être ouverte appeler l'évènement _OnGateOpen et à l'inverse l'évènement _OnGateClose
+        ToggleButtonDisplay(_toggleGateBtn, _isDoorOpen, _gateBtnImage);
     }
 
-    public void ToggleLockButton()
+    public void ToggleLockButton()//1pts
     {
         _isUnlocked = !_isUnlocked;
         _OnToggleLock?.Invoke(_isUnlocked);
-
-        if (_isUnlocked)
-        {
-            _toggleLockBtn.image.sprite = _lockBtnImage[0];
-        }
-        else
-        {
-            _toggleLockBtn.image.sprite = _lockBtnImage[1];
-        }
+        // Inverser la valeur de _isUnlocked
+        // Appeler l'évènement qui barre ou débarre les portes
+        ToggleButtonDisplay(_toggleLockBtn, _isUnlocked, _lockBtnImage);
     }
 
-    public void ToggleLight()
+    public void ToggleLight()//2pts
     {
         _isLightOn = !_isLightOn;
         _lightTimer = 0;
         _currentLightIntensity = _light.intensity;
-        if (_isLightOn)
-        {
-            _toggleLightBtn.image.sprite = _lightBtnImage[0];
-        }
-        else
-        {
-            _toggleLightBtn.image.sprite = _lightBtnImage[1];
-        }
+        // Inverser la valeur de _isLightOn
+
+
+        // Mettre le timer de gradation graduel de la lumière à 0;
+
+        // Assigner la valeur de _currentLight Intensity à la valeur d'intensité actuel de la lumière (_light.intensity)
+        ToggleButtonDisplay(_toggleLightBtn, _isLightOn, _lightBtnImage);
     }
 
-    public void SpawnSphere()
+    public void SpawnSphere()//2pts
     {
         if (_lastSphere != null)
         {
@@ -105,31 +100,52 @@ public class ControlManager : MonoBehaviour
         }
 
         _lastSphere = Instantiate(_sphere, new Vector3(0, 0.5f, 0), Quaternion.identity);
+
+        //Détruire la sphére actuelle si elle existe
+
+        //Instancier une nouvelle sphère au dessus du plan et assigner la valeur de _currentSphere a la sphere nouvellement créée 
     }
 
-    private void Update()
+    private void Update()//4pts
     {
         _lightTimer += Time.deltaTime;
 
         if (_isLightOn)
         {
-            _light.intensity = Mathf.Lerp(_currentLightIntensity, 1, _lightTimer / _lightChangeDelay);
+            _light.intensity = Mathf.Lerp(_currentLightIntensity, 4, _lightTimer / _lightChangeDelay);
         }
         else
         {
             _light.intensity = Mathf.Lerp(_currentLightIntensity, 0, _lightTimer / _lightChangeDelay);
         }
+
+        // Incrémenter le lightTimer en fonction du temps qui s'écoule
+
+        // Si la lumière est allumé, interpoler linéairement l'intensité de la lumière vers 1 en fonction du lightTimer et du _lightChangeDelay
+
+        // Si la lumière est fermée, interpoler linéairement l'intensité de la lumière vers 0 en fonction du lightTimer et du _lightChangeDelay
     }
 
-    public void GiveImpulseToSphere()
+    public void GiveImpulseToSphere()//3pts
     {
         Vector3 RandomDirection = new Vector3(UnityEngine.Random.Range(-1f, 1f), 0, UnityEngine.Random.Range(-1f, 1f)).normalized;
         _lastSphere.GetComponent<Rigidbody>().velocity = _sphereSpeed * RandomDirection;
+        // Créer un vecteur direction de taille 1 (normalisé) qui pointe vers une direction orientée au hazard sur le plan XZ
+
+        // Si la currentSphere existe, utiliser la direction déterminée au hazard pour assigné la vitesse au Rigidbody de la sphère (utiliser sphereSpeed) 
     }
 
-    public void AddOneToScore()
+    public void AddOneToScore()//1pts
     {
         _score++;
         _scoreTxt.text = _score.ToString();
+        //Ajouter 1 au score
+
+        //Mettre a jour la valeur le texte du score dans le UI
+    }
+
+    private void ToggleButtonDisplay(Button btn, bool isOn, List<Sprite> _OnOffSpriteList)
+    {
+        btn.image.sprite = isOn ? _OnOffSpriteList[0] : _OnOffSpriteList[1];
     }
 }
