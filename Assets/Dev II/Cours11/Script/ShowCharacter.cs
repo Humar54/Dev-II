@@ -8,20 +8,15 @@ using TMPro;
 public class ShowCharacter : MonoBehaviour
 {
     [SerializeField] private List<ScriptableCharacter> _characterList;
-    [SerializeField] private Image _image;
     [SerializeField] private TextMeshProUGUI _Pv;
     [SerializeField] private TextMeshProUGUI _Damage;
+    [SerializeField] private Image _image;
     [SerializeField] private float _speed;
 
     private int _characterIndex;
 
-
-    private void Start()
-    {
-       
-    }
     [Button]
-    private void GoUp()
+    private void NextHero()
     {
         _characterIndex++;
         if (_characterIndex >= _characterList.Count)
@@ -32,13 +27,13 @@ public class ShowCharacter : MonoBehaviour
     }
 
     [Button]
-    private void GoDown()
+    private void PreviousHero()
     {
         _characterIndex--;
 
         if (_characterIndex <= 0)
         {
-            _characterIndex = _characterList.Count;
+            _characterIndex = _characterList.Count-1;
         }
         UpdateCharacter();
     }
