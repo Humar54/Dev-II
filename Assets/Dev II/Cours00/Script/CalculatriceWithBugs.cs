@@ -16,17 +16,21 @@ public class CalculatriceWithBugs : MonoBehaviour
 
     private void Start()
     {
-        List<Button> buttons = new List<Button>();
+        _buttonList = new List<Button>();
 
-        for (int i = 0; i < _buttonList.Count-1; i++)
+        for (int i = 0; i < _buttonList.Count - 1; i++)
         {
-            int buttonValue = i+1;
-            _buttonList[buttonValue].onClick.AddListener(delegate { EnterValue(buttonValue); });
+            int buttonValue = i + 1;
+            _buttonList[buttonValue].onClick.AddListener(delegate { EnterValue(buttonValue.ToString()); });
         }
     }
 
-
-    public void EnterValue(int newValue)
+    public void Dot()
+    {
+        EnterValue(".");
+    }
+        
+    public void EnterValue(string newValue)
     {
         if(_isCalculationResult)
         {
@@ -35,13 +39,14 @@ public class CalculatriceWithBugs : MonoBehaviour
         float test;
         if (float.TryParse(_textValue.text, out test))
         {
-            _textValue.text = string.Concat(_textValue.text, newValue.ToString());
+            _textValue.text = string.Concat(_textValue.text, newValue);
             _currentNumber = float.Parse(_textValue.text);
         }
         else
         {
-            _textValue.text = newValue.ToString();
+            _textValue.text = newValue;
             _currentNumber = float.Parse(_textValue.text);
+            
         }
         _isCalculationResult = false;
     }

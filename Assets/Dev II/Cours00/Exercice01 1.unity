@@ -230,8 +230,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 165442625}
         m_TargetAssemblyTypeName: CalculatriceWithBugs, Assembly-CSharp
-        m_MethodName: EnterValue
-        m_Mode: 5
+        m_MethodName: Dot
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -594,7 +594,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 165442625}
         m_TargetAssemblyTypeName: CalculatriceWithBugs, Assembly-CSharp
-        m_MethodName: Multiply
+        m_MethodName: Factorise
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
