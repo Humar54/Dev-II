@@ -14,6 +14,6 @@ public class ShotGun : Gun
     protected override void LaunchProjectile()
     {
         EmitGunFireSound();
-        Debug.Log("Launch a Volley of projectile");
+        Debug.Log("Launch a volley of projectile");
     }
 }
