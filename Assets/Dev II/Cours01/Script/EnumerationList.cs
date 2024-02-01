@@ -40,7 +40,8 @@ public class EnumerationList : MonoBehaviour
                     break;
             }
         }
-
+        Fruits test =Fruits.apple;
+   
         Debug.Log($"Apple count : {appleCount} Cherry count : {cherryCount} Pear count : {pearCount}");
     }
 }
