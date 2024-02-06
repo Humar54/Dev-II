@@ -1,13 +1,14 @@
-using System;
+
 using UnityEngine;
 
 public class DoorManagerEvent : MonoBehaviour
 {
-    public static Action _OnDoorOpen;
     [SerializeField] private Animator _doorRigth;
     [SerializeField] private Animator _doorLeft;
+    
 
     private bool _doorIsLocked = true;
+
 
     private void Start()
     {
@@ -20,13 +21,12 @@ public class DoorManagerEvent : MonoBehaviour
         _doorIsLocked = false;
     }
 
-    public void OpenDoor()
+    public void OpenDoor(bool doorIsOpen)
     {
         if (!_doorIsLocked)
         {
-            _doorRigth.SetBool("Open", true);
-            _doorLeft.SetBool("Open", true);
-            _OnDoorOpen?.Invoke();
+            _doorRigth.SetBool("Open", doorIsOpen);
+            _doorLeft.SetBool("Open", doorIsOpen);
         }
     }
 }

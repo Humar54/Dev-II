@@ -5,16 +5,19 @@ using UnityEngine.UI;
 public class DoorButtonsEvent : MonoBehaviour
 {
     public static Action _onDoorUnlock;
-    public static Action _onDoorOpen;
+    public static Action<bool> _onDoorOpen;
 
     [SerializeField] private Button _openBtn;
     [SerializeField] private Button _unlockBtn;
+    [SerializeField] private Sprite _closeBtnImage;
+    [SerializeField] private Sprite _openBtnImage;
+
+    private bool _doorIsOpen;
 
     private void Awake()
     {
         _openBtn.onClick.AddListener(OpenDoor);
         _unlockBtn.onClick.AddListener(UnlockDoor);
-        DoorManagerEvent._OnDoorOpen += DisableOpenBtn;
     }
 
     private void UnlockDoor()
@@ -23,13 +26,17 @@ public class DoorButtonsEvent : MonoBehaviour
         _unlockBtn.interactable = false;
     }
 
-    private void DisableOpenBtn()
-    {
-        _openBtn.interactable = false;
-    }
-
     private void OpenDoor()
     {
-        _onDoorOpen?.Invoke();
+        _doorIsOpen = !_doorIsOpen;
+        _onDoorOpen?.Invoke(_doorIsOpen);
+        if( _doorIsOpen )
+        {
+            _openBtn.image.sprite = _openBtnImage;
+        }
+        else
+        {
+            _openBtn.image.sprite = _closeBtnImage;
+        }
     }
 }

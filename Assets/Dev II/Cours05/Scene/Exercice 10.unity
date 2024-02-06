@@ -1284,6 +1284,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _openBtn: {fileID: 1753676113}
   _unlockBtn: {fileID: 1901958643}
+  _closeBtnImage: {fileID: 21300000, guid: 61068066490dba7428abaa04ffeb5eac, type: 3}
+  _openBtnImage: {fileID: 21300000, guid: cfa29911603394b4994ce062b0141697, type: 3}
 --- !u!1 &1385213603
 GameObject:
   m_ObjectHideFlags: 0
