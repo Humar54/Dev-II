@@ -15,6 +15,11 @@ public class ShowCharacter : MonoBehaviour
 
     private int _characterIndex;
 
+    private void Start()
+    {
+        UpdateCharacter();
+    }
+
     [Button]
     private void NextHero()
     {
