@@ -10,6 +10,6 @@ public class Ressource
     public string _type;
     public int _value;
 
-    private List<string> _allType { get { return new List<string>() { "Wood", "Mineral", "Gold", "Food" }; } }
+    private List<string> _allType { get { return new List<string>() { "Mineral", "Food" }; } }
 
 }
