@@ -18,14 +18,14 @@ public class ZoneToolEditor : Editor
         //return the "target" , (The Zone tool script that was clicked on)
         _zoneTool = (ZoneTool)target;
         // Get The current scene view and adjust it's parameters
-        SceneView test = SceneView.lastActiveSceneView;
+        SceneView view = SceneView.lastActiveSceneView;
         //set the scene view to 2D
-        test.in2DMode = true;
+        view.in2DMode = true;
 
-        if (test != null)
+        if (view != null)
         {
             //set the sceneView camera to orthographic
-            test.orthographic = true;
+            view.orthographic = true;
         }
         _zoneTool.Init();
         //Set the size of the scene View.
@@ -36,12 +36,12 @@ public class ZoneToolEditor : Editor
     private void OnDisable()
     {
         // Reset the scene view swttings
-        SceneView test = SceneView.lastActiveSceneView;
-        if (test != null)
+        SceneView view = SceneView.lastActiveSceneView;
+        if (view != null)
         {
-            test.orthographic = false;
+            view.orthographic = false;
         }
-        test.in2DMode = false;
+        view.in2DMode = false;
         HandleUtility.AddDefaultControl(GUIUtility.GetControlID(FocusType.Keyboard));
     }
 
@@ -55,7 +55,7 @@ public class ZoneToolEditor : Editor
         Vector3 Pos = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition).origin;
         Vector3 MouseWorldPos = new(Pos.x, Pos.y, 0);
 
-        // Listen for left click mouse event
+        // Listen for left click mouse event in the editor
         if (Event.current.type == EventType.MouseDown && Event.current.button == 0)
         {
             _zoneTool.AddPointToZone(MouseWorldPos);
@@ -141,13 +141,13 @@ public class ZoneToolEditor : Editor
         GUILayout.TextField("-> Move Camera Around", GUILayout.Width(150));
 
         GUILayout.EndHorizontal();
-
+        //Generate a Int input field ,  you can listen to the entered Value with it's return value
         int newValue = EditorGUILayout.IntField(_zoneTool._zoneIndex, GUILayout.Width(150));
         _zoneTool._zoneIndex = newValue;
         GUILayout.EndVertical();
         GUI.color = basicColor;
         // Draw all the element of the base inspector in that case of ZoneTool
-        //DrawDefaultInspector();
+        DrawDefaultInspector();
     }
 
 
