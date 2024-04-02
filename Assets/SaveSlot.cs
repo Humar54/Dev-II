@@ -20,15 +20,9 @@ public class SaveSlot : MonoBehaviour
 
     public void Load()
     {
-        _saveloadJSON.LoadDataJsonGame(_name.text);
+        _saveloadJSON.LoadFromJson(Application.persistentDataPath + $"/{_name.text}.json");
     }
 
-    public void Save()
-    {
-        string date;
-        _saveloadJSON.SaveGame(out date);
-        _date.text = date;
-    }
     public void Delete()
     {
         _saveloadJSON.DeleteSaveFile(_name.text);
