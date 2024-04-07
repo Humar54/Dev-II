@@ -6,7 +6,7 @@ public class IdleState : BaseState
     private NavMeshAgent _agent;
     private Vector3 _startPos;
     private float _minDist;
-  
+
     public void init(Vector3 origine, float minDist, NavMeshAgent agent)
     {
         _startPos = origine;
@@ -14,7 +14,7 @@ public class IdleState : BaseState
         _agent = agent;
     }
 
-    public IdleState(string id) : base(id)
+    public IdleState() : base()
     {
     }
 

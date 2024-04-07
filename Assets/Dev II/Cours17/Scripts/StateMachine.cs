@@ -1,41 +1,26 @@
-using System;
 using UnityEngine;
 
 public enum States
-{ Idle, Patrol, Pursuite};
+{ Idle, Patrol, Pursuite };
 
 public class StateMachine : MonoBehaviour
 {
-    public event Action<BaseState> OnStateChanged = delegate { };
-
+    //The stat machine contains the current state
     private BaseState currentState;
-
-    public BaseState CurrentState
-    {
-        get { return currentState; }
-    }
-
-    public void Init(BaseState intialState)
-    {
-        currentState = intialState;
-        currentState.Enter();
-    }
 
     public void ChangeState(BaseState state)
     {
+        // Call the exit function on the current state
         if (currentState != null)
         {
             currentState.Exit();
         }
-
+        // Change the actual state of the StateMachine
         currentState = state;
+        // Call the Enter function on the new State
         currentState.Enter();
-
-        if (OnStateChanged != null)
-        {
-            OnStateChanged(currentState);
-        }
     }
+
     public BaseState GetCurrentState()
     {
         return currentState;
@@ -44,7 +29,7 @@ public class StateMachine : MonoBehaviour
     private void Update()
     {
         if (currentState == null) return;
-
+        // Call the update function of the current state 
         currentState.Update();
     }
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,14 +7,14 @@ public class ChaseState : BaseState
     private NavMeshAgent _agent;
     private float _stopDist;
 
-    public void init(Transform target, NavMeshAgent agent , float mindist)
+    public void init(Transform target, NavMeshAgent agent, float mindist)
     {
         _target = target;
         _agent = agent;
         _stopDist = mindist;
     }
 
-    public ChaseState(string id) : base(id)
+    public ChaseState() : base()
     {
     }
 
@@ -31,7 +29,7 @@ public class ChaseState : BaseState
 
     public override void Update()
     {
-        if((_target.position-_agent.transform.position).magnitude>_stopDist)
+        if ((_target.position - _agent.transform.position).magnitude > _stopDist)
         {
             _agent.SetDestination(_target.position);
         }

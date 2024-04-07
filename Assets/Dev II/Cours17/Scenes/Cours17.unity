@@ -210,7 +210,6 @@ MonoBehaviour:
   _patrolPoint1: {fileID: 1812961588153978810}
   _patrolPoint2: {fileID: 1812961587367742848}
   _target: {fileID: 1812961588122798953}
-  _previous_State: 0
   _state: 0
   _minStopDist: 0.5
 --- !u!114 &1812961586312544244
@@ -613,22 +612,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!111 &1812961588122798949
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1812961588122798950}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 69003699b9a78c54695c59f3c3e9b7b9, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 69003699b9a78c54695c59f3c3e9b7b9, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!1 &1812961588122798950
 GameObject:
   m_ObjectHideFlags: 0
@@ -641,7 +624,7 @@ GameObject:
   - component: {fileID: 1812961588122798954}
   - component: {fileID: 1812961588122798955}
   - component: {fileID: 1812961588122798948}
-  - component: {fileID: 1812961588122798949}
+  - component: {fileID: 1812961588122798956}
   m_Layer: 0
   m_Name: Target
   m_TagString: Untagged
@@ -692,7 +675,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b6e90f9981324d341a2ca285ef5210c4, type: 2}
+  - {fileID: 2100000, guid: 3e55a11a05aa141af9f3be5e921cc003, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -714,6 +697,26 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!95 &1812961588122798956
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1812961588122798950}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2649cd36975b614498e8bd0b4bdbbffa, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!4 &1812961588153978810
 Transform:
   m_ObjectHideFlags: 0
