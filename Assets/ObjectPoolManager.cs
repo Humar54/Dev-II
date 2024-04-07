@@ -64,8 +64,6 @@ public class ObjectPoolManager : MonoBehaviour
 
     }
 
-
-
     public void ReturnObjectPool(GameObject obj)
     {   //format the objectName to get ride of the (Clone) (7 characters)
         string goName = obj.name.Substring(0, obj.name.Length - 7);

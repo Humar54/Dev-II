@@ -5,7 +5,6 @@ public class Cours16_Bullet : MonoBehaviour
 {
     [SerializeField] private float _selfDestroyDelay = 5f;
 
-
     private void OnEnable()
     {
         StartCoroutine(SelfDestroyAfterDelay());
@@ -16,5 +15,4 @@ public class Cours16_Bullet : MonoBehaviour
         yield return new WaitForSeconds(_selfDestroyDelay);
         ObjectPoolManager.Instance.ReturnObjectPool(gameObject);
     }
-
 }
