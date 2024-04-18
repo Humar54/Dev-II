@@ -1,7 +1,8 @@
 
+using NaughtyAttributes;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
+using UnityEngine;
 
 public class List04 : MonoBehaviour
 {
@@ -13,12 +14,13 @@ public class List04 : MonoBehaviour
         Biggest
     }
 
-    [SerializeField] private List<Transform> _listGameObject = new List<Transform>();
+    [SerializeField] private List<Transform> _listGameObject = new();
     [SerializeField] private Material _greenMaterial;
     [SerializeField] private Material _redMaterial;
     [SerializeField] private CategoryType _currentCategoryType;
     [SerializeField] private float _nbSpherePerCategory;
 
+    [Button]
     public void ExecuteActionType()
     {
         foreach (Transform sphere in _listGameObject)
@@ -33,7 +35,7 @@ public class List04 : MonoBehaviour
                 SetGreenColorToList(orderedList);
                 break;
             case CategoryType.Fartest:
-                List<Transform> orderedList1 = _listGameObject.OrderByDescending(x => (x.transform.position-new Vector3(0,0,0)).magnitude).ToList();
+                List<Transform> orderedList1 = _listGameObject.OrderByDescending(x => (x.transform.position - new Vector3(0, 0, 0)).magnitude).ToList();
                 SetGreenColorToList(orderedList1);
                 break;
             case CategoryType.Smallest:
