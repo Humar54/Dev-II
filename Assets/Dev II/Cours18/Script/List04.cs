@@ -1,4 +1,3 @@
-
 using NaughtyAttributes;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +26,6 @@ public class List04 : MonoBehaviour
         {
             sphere.GetComponent<MeshRenderer>().material = _redMaterial;
         }
-
         switch (_currentCategoryType)
         {
             case CategoryType.Closest:
