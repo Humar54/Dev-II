@@ -4,25 +4,31 @@ using TMPro;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class CalculatriceWithBugs : MonoBehaviour
+public class CalculatorWithoutBugs : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _textValue;
     [SerializeField] private List<Button> _buttonList;
+
+    private GameObject _gameObject;
     private float _previousNumber;
     private float _currentNumber;
     private int _currentOperation;
     private bool _isCalculationResult;
 
-
     private void Start()
     {
-        _buttonList = new List<Button>();
+        //_buttonList = new List<Button>();
 
-        for (int i = 0; i < _buttonList.Count - 1; i++)
+        for (int i = 0; i < _buttonList.Count ; i++)
         {
-            int buttonValue = i + 1;
+            int buttonValue = i ;
             _buttonList[buttonValue].onClick.AddListener(delegate { EnterValue(buttonValue.ToString()); });
         }
+    }
+
+    private void Update()
+    {
+        //Debug.Log(_gameObject.name);
     }
 
     public void Dot()
@@ -44,8 +50,17 @@ public class CalculatriceWithBugs : MonoBehaviour
         }
         else
         {
-            _textValue.text = newValue;
-            _currentNumber = float.Parse(_textValue.text);
+            if(newValue== ".")
+            {
+                _textValue.text = "0.";
+                _currentNumber = 0;
+            }
+            else
+            {
+                _textValue.text = newValue;
+                _currentNumber = float.Parse(_textValue.text);
+            }
+
             
         }
         _isCalculationResult = false;
@@ -86,7 +101,7 @@ public class CalculatriceWithBugs : MonoBehaviour
     public void Calculate()
     {
         float result = 0;
-        switch (_currentOperation-1)
+        switch (_currentOperation)
         {
             case 1:
                 result = _currentNumber + _previousNumber;

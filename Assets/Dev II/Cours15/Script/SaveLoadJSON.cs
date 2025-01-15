@@ -12,6 +12,7 @@ public class PlayerData
     public int _gold;
     public Vector3 _position;
     public List<Ress> _ressourceList;
+    public List<Enemy5> _enemyList;
 }
 
 
