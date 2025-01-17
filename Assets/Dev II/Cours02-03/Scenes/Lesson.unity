@@ -140,7 +140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &13857373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,7 +324,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &691216652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -437,7 +437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a3591d4acb320c4287e7f5081d95483, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _equipedGun: {fileID: 2060455902}
+  _equipedGun: {fileID: 13857373}
 --- !u!212 &786894975
 SpriteRenderer:
   m_ObjectHideFlags: 0
