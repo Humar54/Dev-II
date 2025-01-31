@@ -5,7 +5,7 @@ public class Enumeration : MonoBehaviour
 {
     [SerializeField] private Direction _currentDirection;
     [SerializeField] private Rigidbody _rigidBody;
-    [SerializeField] private float _speed=2f;
+    [SerializeField] private float _speed = 2f;
 
     enum Direction
     {
@@ -16,6 +16,9 @@ public class Enumeration : MonoBehaviour
         Front,
         Back
     }
+
+
+ 
 
     private void Update()
     {
