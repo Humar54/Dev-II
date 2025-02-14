@@ -14,24 +14,27 @@ public class WorkerDelegate : MonoBehaviour
         Farming,
     }
 
-    private void Start()
+
+    private void UpdateDelegate()
     {
         switch (_workType)
         {
             case WorkType.Mining:
-                _delegate = Mining;
+                _delegate += Mining;
                 break;
             case WorkType.Logging:
-                _delegate = Logging;
+                _delegate += Logging;
                 break;
             case WorkType.Farming:
-                _delegate = Farming;
+                _delegate += Farming;
                 break;
         }
     }
 
     public void Work()
     {
+        _delegate = null;
+        UpdateDelegate();
         _delegate?.Invoke();
     }
 

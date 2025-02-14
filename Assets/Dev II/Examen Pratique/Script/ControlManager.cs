@@ -121,7 +121,7 @@ public class ControlManager : MonoBehaviour
 
         // Incrémenter le lightTimer en fonction du temps qui s'écoule
 
-        // Si la lumière est allumé, interpoler linéairement l'intensité de la lumière vers 1 en fonction du lightTimer et du _lightChangeDelay
+        // Si la lumière est allumé, interpoler linéairement l'intensité de la lumière vers 10f en fonction du lightTimer et du _lightChangeDelay
 
         // Si la lumière est fermée, interpoler linéairement l'intensité de la lumière vers 0 en fonction du lightTimer et du _lightChangeDelay
     }

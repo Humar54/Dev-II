@@ -1394,7 +1394,7 @@ GameObject:
   - component: {fileID: 1357892349982765490}
   - component: {fileID: 4878144192036366982}
   m_Layer: 0
-  m_Name: Ch10
+  m_Name: Character_Ex
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
