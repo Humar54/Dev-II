@@ -16,29 +16,29 @@ public class Exercice28 : MonoBehaviour
     private IEnumerator MyCoroutine()
     {
         yield return new WaitForSeconds(2f);
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < 500; i++)
         {
             float distance = new Vector3(10, 10, 10).magnitude;
         }
-        yield return new WaitForSeconds(1f);
-        for (int i = 0; i < 50; i++)
+        yield return new WaitForSeconds(2f);
+        for (int i = 0; i < 125; i++)
         {
             Debug.Log("This is a very important message");
         }
         yield return new WaitForSeconds(1f);
-        Factorial(220);
+        Factorial(10000);
         yield return new WaitForSeconds(1f);
-        for (int i = 0; i < 50; i++)
+        for (int i = 0; i < 75; i++)
         {
             Instantiate(_prefab1);
         }
         yield return new WaitForSeconds(1f);
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 75; i++)
         {
             Instantiate(_prefab2);
         }
         yield return new WaitForSeconds(1f);
-        for (int i = 0; i < 50; i++)
+        for (int i = 0; i < 500; i++)
         {
             if (Physics.Raycast(transform.position, transform.forward, 100))
             {

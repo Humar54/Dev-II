@@ -113,7 +113,7 @@ public class CalculatorWithoutBugs : MonoBehaviour
                 result = _currentNumber * _previousNumber;
                 break;
             case 4:
-                result = _previousNumber / (int)_currentNumber;
+                result = _previousNumber / _currentNumber;
                 break;
             default:
                 break;
