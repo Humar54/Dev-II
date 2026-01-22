@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnumerationList : MonoBehaviour
 {
+
+    [SerializeField] private Fruits _fruitsToCount;
     [SerializeField] private List<Fruits> _fruitList= new List<Fruits>();
     private enum Fruits
     {
@@ -12,11 +14,19 @@ public class EnumerationList : MonoBehaviour
         pear,
     }
 
-    private void Start()
+    private void Update()
     {
-        CountEachFruit();
-    }
+        int count = 0;
 
+        foreach (Fruits fruit in _fruitList)
+        {
+            if(fruit ==_fruitsToCount)
+            {
+                count++;
+            }
+        }
+        Debug.Log($"There is {count} {_fruitsToCount}(s)");
+    }
     private void CountEachFruit()
     {
         int appleCount = 0;
