@@ -239,22 +239,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff82eaae1efdb6d4bb08fd5ec0ccaa46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vectorValue: {x: 0, y: 1, z: 0}
+  _numberOfTreeToInstantiate: 10
   _treeList:
-  - _numberOfBranch: 0
-    _radius: 1.5
-    _height: 1.5
-  - _numberOfBranch: 0
-    _radius: 1
-    _height: 1
-  - _numberOfBranch: 0
-    _radius: 0.5
-    _height: 1
-  - _numberOfBranch: 0
-    _radius: 1
+  - _radius: 0.3
+    _height: 0.3
+  - _radius: 0.4
+    _height: 0.4
+  - _radius: 0.3
     _height: 0.5
-  _forestRange: 5
+  - _radius: 0.4
+    _height: 0.5
   _treePrefab: {fileID: 164760, guid: 8ed44b12ca34ce34e9754ece5b325562, type: 3}
   _allTree: []
+  _shape: 1
+  _radius: 2
+  _rectangleSize: {x: 10, y: 10}
+  _offset: {x: 2.49, y: 0, z: -4.91}
 --- !u!64 &461911438
 MeshCollider:
   m_ObjectHideFlags: 0
