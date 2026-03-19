@@ -330,6 +330,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61189cd314ec7fa40830a1ceb91054b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _currentList:
+  - {x: -70, y: -20, z: 0}
+  - {x: -70, y: -30, z: 0}
+  - {x: -40, y: -30, z: 0}
+  - {x: -40, y: -20, z: 0}
+  _collapsePointRange: 3
+  _zoneIndex: 0
 --- !u!4 &1339210686
 Transform:
   m_ObjectHideFlags: 0

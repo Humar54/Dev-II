@@ -1,4 +1,4 @@
-
+﻿
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -11,6 +11,9 @@ public class ZoneToolEditor : Editor
 {
     //We create a reference to the script for which we want a custom editor
     private ZoneTool _zoneTool;
+    private int _draggedIndex = -1;
+    private bool _isDragging = false;
+
 
     //Called when the ZoneTool inpector window is showned
     private void OnEnable()
@@ -45,22 +48,112 @@ public class ZoneToolEditor : Editor
         HandleUtility.AddDefaultControl(GUIUtility.GetControlID(FocusType.Keyboard));
     }
 
+    private int GetClosestIndex(Vector3 mousePos)
+    {
+        var points = _zoneTool.GetAllPointList()[_zoneTool.GetCurrentZoneIndex()];
+
+        float minDist = 2.0f; // same as your collapse range
+        int closest = -1;
+
+        for (int i = 0; i < points.Count; i++)
+        {
+            float d = Vector3.Distance(points[i], mousePos);
+            if (d < minDist)
+            {
+                minDist = d;
+                closest = i;
+            }
+        }
+
+        return closest;
+    }
+
+
     //Called everytime something change in the scene view (the equivalent of the editor update)
     private void OnSceneGUI()
     {
-        //Get the list of all points from the zone tool
         List<List<Vector3>> list = _zoneTool.GetAllPointList();
         HandleUtility.AddDefaultControl(GUIUtility.GetControlID(FocusType.Passive));
-        //Get The current Mouse position in the scene view
+
         Vector3 Pos = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition).origin;
         Vector3 MouseWorldPos = new(Pos.x, Pos.y, 0);
 
-        // Listen for left click mouse event in the editor
+        // --- RIGHT CLICK: remove closest point ---
+        if (Event.current.type == EventType.MouseDown && Event.current.button == 1)
+        {
+            var points = _zoneTool.GetAllPointList()[_zoneTool.GetCurrentZoneIndex()];
+
+            if (points.Count > 0)
+            {
+                float minDist = Mathf.Infinity;
+                int closestIndex = -1;
+
+                // Find closest point to mouse
+                for (int i = 0; i < points.Count; i++)
+                {
+                    float d = Vector3.Distance(points[i], MouseWorldPos);
+                    if (d < minDist)
+                    {
+                        minDist = d;
+                        closestIndex = i;
+                    }
+                }
+
+                // Remove it
+                if (closestIndex != -1)
+                {
+                    points.RemoveAt(closestIndex);
+                    _zoneTool.SetDirty();
+                }
+            }
+
+            Event.current.Use(); // prevent SceneView context menu
+        }
+
+
+
+
+        // Left click → add point
         if (Event.current.type == EventType.MouseDown && Event.current.button == 0)
         {
             _zoneTool.AddPointToZone(MouseWorldPos);
             _zoneTool.SetDirty();
         }
+
+        Event e = Event.current;
+
+        // --- START DRAG (Middle Mouse Button) ---
+        if (e.type == EventType.MouseDown && e.button == 2)
+        {
+            // ⭐ THIS WAS MISSING ⭐
+            _draggedIndex = GetClosestIndex(MouseWorldPos);
+
+            if (_draggedIndex != -1)
+            {
+                _isDragging = true;
+                e.Use();   // stop SceneView panning
+            }
+            else
+            {
+                _zoneTool.SetDirty();
+            }
+        }
+
+        // --- DRAGGING ---
+        if (_isDragging && e.type == EventType.MouseDrag && e.button == 2)
+        {
+            _zoneTool.MoveToClosestIncrement(MouseWorldPos);
+            _zoneTool.SetDirty();
+            e.Use();   // stop SceneView panning
+        }
+
+        // --- END DRAG ---
+        if (e.type == EventType.MouseUp && e.button == 2)
+        {
+            _isDragging = false;
+            _draggedIndex = -1;
+        }
+
         DrawAllZone(list);
     }
 
@@ -70,13 +163,22 @@ public class ZoneToolEditor : Editor
         for (int j = 0; j < pointList.Count; j++)
         {
             List<Vector3> list = pointList[j];
+            bool isCurrent = _zoneTool.GetCurrentZoneIndex() == j;
 
+            // Draw all consecutive lines
             for (int i = 0; i < list.Count - 1; i++)
             {
-                DrawLineBetweenNod(list[i], list[i + 1], _zoneTool.GetCurrentZoneIndex() == j);
+                DrawLineBetweenNod(list[i], list[i + 1], isCurrent);
+            }
+
+            // Draw last → first (closing the loop)
+            if (list.Count > 1)
+            {
+                DrawLineBetweenNod(list[list.Count - 1], list[0], isCurrent);
             }
         }
     }
+
 
     private void DrawLineBetweenNod(Vector3 Pos1, Vector3 Pos2, bool isCurrentZone)
     {

@@ -5,7 +5,7 @@ using UnityEngine;
 public class ZoneTool : MonoBehaviour
 {
     [SerializeField] private List<List<Vector3>> _listOfPointsList = new();
-    private List<Vector3> _currentList;
+    [SerializeField] private List<Vector3> _currentList;
     [SerializeField] private float _collapsePointRange = 0.5f;
     public int _zoneIndex;
 
@@ -15,6 +15,7 @@ public class ZoneTool : MonoBehaviour
         _listOfPointsList.Add(_currentList);
         _zoneIndex = _listOfPointsList.Count - 1;
     }
+
 
     public void Init()
     {
@@ -54,16 +55,50 @@ public class ZoneTool : MonoBehaviour
         SetDirty();
     }
 
+
+    public void MoveToClosestIncrement(Vector3 Pos)
+    {
+        float minDistance =Mathf.Infinity;
+        int closerstIndex  =int.MaxValue;
+        int index=0;
+
+        foreach (Vector3 item in _currentList)
+        {
+            float distance= (item - Pos).magnitude;
+            if(distance < minDistance)
+            {
+                minDistance = distance;
+                closerstIndex =index;
+            }
+            index++;
+            
+        }
+
+        _currentList[closerstIndex] = SnapVector(Pos, 1f);
+    }
+
+
+
+    public static Vector3 SnapVector(Vector3 v, float increment)
+    {
+        float Snap(float x) => Mathf.Round(x / increment) * increment;
+        return new Vector3(Snap(v.x), Snap(v.y), Snap(v.z));
+    }
+
     public void AddPointToZone(Vector3 Pos)
     {
 
         Vector3 positionToAdd = Pos;
-        foreach (Vector3 point in _currentList)
+
+        if (_currentList.Count>=1)
         {
-            if ((point - Pos).magnitude <= _collapsePointRange)
+            float distance = (_currentList[0] - Pos).magnitude;
+            
+
+            if(distance <_collapsePointRange)
             {
-                positionToAdd = point;
-                break;
+                Debug.Log("Collaspe"  );
+                positionToAdd = _currentList[0];
             }
         }
 
