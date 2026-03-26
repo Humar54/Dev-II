@@ -28,6 +28,11 @@ public class SaveSlot : MonoBehaviour
         _saveloadJSON.DeleteSaveFile(_name.text);
         Destroy(gameObject);
     }
+
+    public string GetName()
+    {
+        return _name.text;
+    }
 }
 
 
